@@ -1,0 +1,15 @@
+/target
+/lib
+/classes
+/checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+.git
+.settings
+/bin
+.DS_Store
+.classpath
+.lein*
+public/*.js
