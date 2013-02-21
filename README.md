@@ -19,10 +19,10 @@ Draw seven cards and determine the best possible hand that can generated from th
 (bestallhands (:drawncards (drawmulti 7 deck))
 ```
 
-Compare two hands: (I could probably use a better label than :best)
+Compare two hands: (I'll make a better way to do this, as the initial function's type signature was based off of my needs for another program)
 ```clj
-(comparetwohands {:best :royalflush, :result (hand [:hearts :queen :10 :jack :ace :king])}
-                 {:best :onepair, :result (hand [:hearts :2 :3 :4] [:spades :4 :jack])})
+(comparetwohands (bestallhands (hand [:hearts :queen :10 :jack :ace :king]))
+                 (bestallhands (hand [:hearts :2 :3 :4] [:spades :4 :jack]))})
 ```
 
 ## License
