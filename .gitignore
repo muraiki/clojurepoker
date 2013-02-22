@@ -13,3 +13,4 @@ pom.xml.asc
 .classpath
 .lein*
 public/*.js
+src/crossover-cljs

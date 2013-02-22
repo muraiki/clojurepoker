@@ -15,19 +15,25 @@
   :source-paths ["src/clj"]
   
   :cljsbuild {
+
+    :crossovers [clojurepoker.core clojurepoker.combo]
+
+    :crossover-path "src/crossover-cljs"
+
+    :crossover-jar false
     
     :builds {
 
-    :dev
-    {:source-paths ["src/clj"]
-      :compiler
-      {:pretty-print true
-       :output-to "public/clojurepoker-dev.js"
-       :optimizations :whitespace}}
+      :dev
+      {:source-paths ["src/crossover-cljs"]
+        :compiler
+        {:pretty-print true
+         :output-to "public/clojurepoker-dev.js"
+         :optimizations :whitespace}}
 
-    :prod
-    {:source-paths ["src/clj"]
-      :compiler
-      {:pretty-print false
-       :output-to "public/clojurepoker.js"
-       :optimizations :advanced}}}})
+      :prod
+      {:source-paths ["src/crossover-cljs"]
+        :compiler
+        {:pretty-print false
+         :output-to "public/clojurepoker.js"
+         :optimizations :advanced}}}})
