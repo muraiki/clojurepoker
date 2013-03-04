@@ -30,7 +30,7 @@ Draw seven cards and determine the best possible hand that can generated from th
 (bestallhands (:drawncards (drawmulti 7 deck)))
 ; result
 {:best :straight, :result ({:suit :clubs, :rank :jack}
-													 {:suit :spades, :rank :9}
+                           {:suit :spades, :rank :9}
                            {:suit :hearts, :rank :8}
                            {:suit :diamonds, :rank :10}
                            {:suit :spades, :rank :queen})}
@@ -42,7 +42,7 @@ Compare two seven card hands (as in Texas Hold 'em):
              (hand [:hearts :2 :3 :4] [:spades :4 :jack]))
 ; result
 {:best :flush :result [{:suit :hearts, :rank :ace}
-											 {:suit :hearts, :rank :2}
+		       {:suit :hearts, :rank :2}
                        {:suit :hearts, :rank :3}
                        {:suit :hearts, :rank :jack}
                        {:suit :hearts, :rank :8}]}
