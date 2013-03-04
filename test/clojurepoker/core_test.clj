@@ -266,31 +266,31 @@
                                           [:diamonds :ace]
                                           [:clubs :ace]))))))
 
-(deftest comparetwohands-firstgreater
-  (testing "Testing comparetwohands, first hand greater."
-           (is (resulteq? (comparetwohands {:best :royalflush, :result (hand [:hearts :queen :10 :jack :ace :king])}
-                                           {:best :onepair, :result (hand [:hearts :2 :3 :4] [:spades :4 :jack])})
+(deftest comparetwobesthands-firstgreater
+  (testing "Testing comparetwobesthands, first hand greater."
+           (is (resulteq? (comparetwobesthands {:best :royalflush, :result (hand [:hearts :queen :10 :jack :ace :king])}
+                                               {:best :onepair, :result (hand [:hearts :2 :3 :4] [:spades :4 :jack])})
                           {:best :royalflush,
                            :result (hand [:hearts :queen :10 :jack :ace :king])}))))
 
-(deftest comparetwohands-secondgreater
-  (testing "Testing comparetwohands, secondhand greater."
-           (is (resulteq? (comparetwohands {:best :onepair, :result (hand [:hearts :2 :3 :4] [:spades :4 :jack])}
-                                           {:best :royalflush, :result (hand [:hearts :queen :10 :jack :ace :king])})
+(deftest comparetwobesthands-secondgreater
+  (testing "Testing comparetwobesthands, secondhand greater."
+           (is (resulteq? (comparetwobesthands {:best :onepair, :result (hand [:hearts :2 :3 :4] [:spades :4 :jack])}
+                                               {:best :royalflush, :result (hand [:hearts :queen :10 :jack :ace :king])})
                           {:best :royalflush,
                            :result (hand [:hearts :queen :10 :jack :ace :king])}))))
 
-(deftest comparetwohands-queenpair
-  (testing "Testing comparetwohands, pair of queens beats pair of fours."
-           (is (resulteq? (comparetwohands {:best :onepair, :result (hand [:hearts :2 :3 :4] [:spades :4 :jack])}
-                                           {:best :onepair, :result (hand [:hearts :2 :3 :queen] [:spades :queen :jack])})
+(deftest comparetwobesthands-queenpair
+  (testing "Testing comparetwobesthands, pair of queens beats pair of fours."
+           (is (resulteq? (comparetwobesthands {:best :onepair, :result (hand [:hearts :2 :3 :4] [:spades :4 :jack])}
+                                               {:best :onepair, :result (hand [:hearts :2 :3 :queen] [:spades :queen :jack])})
                           {:best :onepair,
                            :result (hand [:hearts :2 :3 :queen] [:spades :queen :jack])}))))
 
-(deftest comparetwohands-queenpairacehigh
-  (testing "Testing comparetwohands, pair of queens, ace high."
-           (is (resulteq? (comparetwohands {:best :onepair, :result (hand [:hearts :2 :3 :queen] [:spades :queen :ace])}
-                                           {:best :onepair, :result (hand [:hearts :2 :3 :queen] [:spades :queen :jack])})
+(deftest comparetwobesthands-queenpairacehigh
+  (testing "Testing comparetwobesthands, pair of queens, ace high."
+           (is (resulteq? (comparetwobesthands {:best :onepair, :result (hand [:hearts :2 :3 :queen] [:spades :queen :ace])}
+                                               {:best :onepair, :result (hand [:hearts :2 :3 :queen] [:spades :queen :jack])})
                           {:best :onepair,
                            :result (hand [:hearts :2 :3 :queen] [:spades :queen :ace])}))))
 
@@ -394,3 +394,12 @@
                   (bestallhands (hand [:hearts :ace :9]
                                       [:spades :7 :8]
                                       [:clubs :jack :2 :5]))))))
+
+(deftest comparetwo7-flush
+  (testing "Testing comparetwo7, flush"
+           (is (resulteq? {:best :flush
+                           :result (hand [:hearts :ace :2 :3 :jack :8])}
+                  (comparetwo7 (hand [:hearts :ace :2 :3 :jack :8]
+                                     [:spades :jack :queen])
+                               (hand [:hearts :2 :4 :8 :queen]
+                                     [:clubs :2 :8 :jack]))))))

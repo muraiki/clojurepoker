@@ -207,10 +207,10 @@
 (defn extractrankings [thecards]
   "Extract the rank values from a series of cards, sorted high to low."
   (->> thecards
-    (map :rank)
-    (map ranks)
-    (sort)
-    (reverse)))
+    (map :rank)		; Get only the ranks
+    (map ranks)		; Get the numerical value for each rank
+    (sort)				; Order them
+    (reverse)))		; Highest first
 
 ; (cards ...) (cards ...) -> (cards ...)
 (defn comparerankings [cardsa cardsb]
@@ -218,6 +218,8 @@
   (let [ranksa (extractrankings cardsa)
         ranksb (extractrankings cardsb)
         maxindex (dec (count ranksa))]
+    ; This loop steps through each list of sorted ranks and compares them,
+    ; ending with the first non-tie.
     (loop [index 0]
       (cond
         (> (nth ranksa index) (nth ranksb index)) cardsa
@@ -229,8 +231,8 @@
         :else (recur (inc index))))))
 
 ; {:best ranking, :result (cards ...)} {:best ranking, :result (cards ...)} -> {:best ranking, :result (cards ...)}
-(defn comparetwohands [resulta resultb]
-  "Returns the better of two hands."
+(defn comparetwobesthands [resulta resultb]
+  "Returns the better of two hands generated from besthandcombo."
   (let [ranka (rankings (:best resulta))
         rankb (rankings (:best resultb))]
    (cond
@@ -241,7 +243,14 @@
        {:best (:best resulta)
         :result (comparerankings (:result resulta) (:result resultb))})))
 
-; (cards ...) -> {:best rankings-key, :result (cards ...)}
+; (cards ...) -> {:best rankings, :result (cards ...)}
 (defn bestallhands [thecards]
-  "Determine the best possible hand for a given vector of cards."
-  (reduce comparetwohands (besthandcombo thecards)))
+  "Determine the best possible hand for a given vector of cards,
+   such as 7 cards in Texas Hold Em."
+  (reduce comparetwobesthands (besthandcombo thecards)))
+
+; (cards...) (cards ...) -> {:best ranking, :result (cards ...)}
+(defn comparetwo7 [handa handb]
+  "Compare two 7-card hands."
+  (comparetwobesthands (bestallhands handa)
+                       (bestallhands handb)))
