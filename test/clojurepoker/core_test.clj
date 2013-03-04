@@ -2,7 +2,18 @@
   (:use clojure.test
         clojurepoker.core))
 
-; TODO: write a test to verify drawing x cards yields a deck of 52 - x count
+(deftest drawmulti-test
+  (testing "Testing drawmulti"
+    (is (= (or {:drawncards [{:suit :clubs :rank :2} {:suit :clubs :rank :3}]
+                :remainingdeck {:suit :clubs :rank :4}}
+               {:drawncards [{:suit :clubs :rank :2} {:suit :clubs :rank :4}]
+                :remainingdeck {:suit :clubs :rank :3}}
+               {:drawncards [{:suit :clubs :rank :3} {:suit :clubs :rank :4}]
+                :remainingdeck {:suit :clubs :rank :2}}))
+        (drawmulti 2 [{:suit :clubs :rank :2}
+                      {:suit :clubs :rank :3}
+                      {:suit :clubs :rank :4}]))))
+
 (deftest extractrankings-test
   (testing "Testing extractrankings"
            (is (= [14 13 12 11 10])
