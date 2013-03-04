@@ -14,13 +14,15 @@
 
   :source-paths ["src/clj"]
   
+  :hooks [leiningen.cljsbuild]
+  
   :cljsbuild {
 
     :crossovers [clojurepoker.core clojurepoker.combo]
 
     :crossover-path "src/crossover-cljs"
 
-    :crossover-jar false
+    :crossover-jar true
     
     :builds {
 
@@ -36,4 +38,5 @@
         :compiler
         {:pretty-print false
          :output-to "public/clojurepoker.js"
-         :optimizations :advanced}}}})
+         :optimizations :advanced
+         :jar true}}}})

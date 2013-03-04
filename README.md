@@ -3,6 +3,12 @@
 A poker library for Clojure and Clojurescript, early stages.
 
 # Usage
+Append the following to the dependencies in your project.clj file:
+```clj
+:dependencies [[clojurepoker "0.1.0-SNAPSHOT"]]
+```
+
+# API
 A card is a map with this format:
 ```clj
 {:suit :hearts, :rank :ace}
